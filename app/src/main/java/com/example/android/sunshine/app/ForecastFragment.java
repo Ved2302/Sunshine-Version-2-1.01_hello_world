@@ -29,7 +29,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by pc on 14-07-2015.
@@ -66,14 +65,8 @@ public class ForecastFragment extends Fragment {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-            String[] forecastArray = {"Today Sunny 88",
-                    "Monday Cloudy 88",
-                    "Tuesday Sunny 90",
-                    "Wednesday Rainy 78",
-                    "Friday Snowy 50",
-                    "Saturday Sunny 78",
-                    "Sunday Cloudy 60"};
-            ArrayList<String> weekForecast = new ArrayList<String>(Arrays.asList(forecastArray));
+
+            ArrayList<String> weekForecast = new ArrayList<String>();
 
              mForecastAdapter = new ArrayAdapter<String>(
                     getActivity(),
@@ -81,6 +74,8 @@ public class ForecastFragment extends Fragment {
                     R.id.list_item_forecast_textview,
                     weekForecast
             );
+
+            new FetchWeatherTask().execute("401105");
 
             ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
             listView.setAdapter(mForecastAdapter);
